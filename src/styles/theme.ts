@@ -1,29 +1,16 @@
 export default {
   COLORS:{
-    BASE: {
-      GRAY_1: '#1B1D1E',
-      GRAY_2: '#333638',
-      GRAY_3: '#5C6265',
-      GRAY_4: '#B9BBBC',
-      GRAY_5: '#DDDEDF',
-      GRAY_6: '#EFF0F0',
-      GRAY_7: '#FAFAFA',
-      WHITE: '#FFFFFF',
-    },
-
-    PRODUCT: {
-      RED_DARK: '#BF3B44',
-      RED_MID: '#F3BABD',
-      RED_LIGHT: '#F4E6E7',
-
-      GREEN_DARK: '#639339',
-      GREEN_MID: '#CBE4B4',
-      GREEN_LIGHT: '#E5F0DB',
-    },
+    PRIMARY_900: '#050B18',
+    PRIMARY_800: '#0F172A',
+    PRIMARY_500: '#0E5C88',
+    GRAY_900: '#1F2430',
+    GRAY_500: '#64748B',
+    RED_500: '#FF455F',
+    WHITE: '#FFFFFF',
   },
   FONT_FAMILY: {
-    REGULAR: 'NunitoSans_400Regular',
-    BOLD: 'NunitoSans_700Bold'
+    REGULAR: 'Poppins_400Regular',
+    BOLD: 'Poppins_700Bold'
   },
   FONT_SIZE: {
     XS: 12,
