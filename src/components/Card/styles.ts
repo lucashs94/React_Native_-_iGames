@@ -4,14 +4,24 @@ import styled from 'styled-components/native'
 export const Container = styled.TouchableOpacity`
   width: 100%;
   height: 170px;
-  justify-content: flex-end;
-
-  background-color: red;
 
   margin-bottom: 12px;
-  padding: 10px;
-  
+`
+
+export const ImageBG = styled.ImageBackground.attrs(() => ({
+  imageStyle: {
+    borderRadius: 6,
+  },
+}))`
+  flex: 1;
   border-radius: 8px;
+`
+
+export const PropsArea = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+  padding: 12px;
+  background: rgba(0,0,0, 0.5);
 `
 
 export const Title = styled.Text`
@@ -22,7 +32,6 @@ export const Title = styled.Text`
 
 export const RatingArea = styled.View`
   flex-direction: row;
-
   gap: 6px;
 `
 
