@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useIsFocused } from '@react-navigation/native'
 
 import { api } from '../../services/api'
 
@@ -10,20 +11,21 @@ import { HeaderMain } from '../../components/HeaderMain'
 
 import { Container, ContentArea, ContentAreaTitle, ListArea } from './styles'
 
-type IAPIGenreResponse = {
+
+export type IAPIGenreResponse = {
   count: number,
 	next: string | null,
 	previous: string | null,
 	results: IGenreProps[] | []
 }
 
-type IGenreProps = {
+export type IGenreProps = {
   id: string
   name: string
   games_count: number
 }
 
-type IAPIGameResponse = {
+export type IAPIGameResponse = {
   count: number,
 	next: string | null,
 	previous: string | null,
@@ -37,13 +39,14 @@ export type IGameProps = {
 }
 
 export function Home() {
+  
+  const isFocused = useIsFocused()
+  const INSETS = useSafeAreaInsets()
 
   const [genreList, setGenreList] = useState<IGenreProps[]>([])
   const [gameList, setGameList] = useState<IGameProps[]>([])
 
-  const INSETS = useSafeAreaInsets()
 
-  
   async function fetchAllGames(){
     const { data } = await api.get<IAPIGameResponse>('games', {
       params:{
@@ -79,10 +82,12 @@ export function Home() {
 
   useEffect(() => {
 
-    fetchAllGenres()
-    fetchAllGames()
+    if(isFocused){
+      fetchAllGenres()
+      fetchAllGames()
+    }
     
-  }, [])
+  }, [isFocused])
 
 
   return (
@@ -99,7 +104,7 @@ export function Home() {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <GenreBox title={item.name}/>
+            <GenreBox genre={item}/>
           )}
         />
       </ListArea>
