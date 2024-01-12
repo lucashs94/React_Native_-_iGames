@@ -10,6 +10,7 @@ import { Card } from '../../components/Card'
 import { IAPIGameResponse, IGameProps, IGenreProps } from '../Home'
 
 import { ButtonBack, CategoryTitle, Container, Content, Header } from './styles'
+import { Loading } from '../../components/Loading'
 
 type Props = {
   genre: IGenreProps
@@ -20,6 +21,7 @@ export function Categories() {
   const { genre } = params as Props
   
   const [gameList, setGameList] = useState<IGameProps[]>([])
+  const [loading, setLoading] = useState(true)
   
   const INSETS = useSafeAreaInsets()
   const { navigate } = useNavigation()
@@ -44,6 +46,7 @@ export function Categories() {
     })
 
     setGameList(games)
+    setLoading(false)
   }
   
 
@@ -54,6 +57,13 @@ export function Categories() {
     }
     
   }, [isFocused])
+
+
+  if(loading){
+    return(
+      <Loading/>
+    )
+  }
 
 
   return (

@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Home } from '../screens/Home';
 import { Categories } from '../screens/Categories';
+import { Search } from '../screens/Search';
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
@@ -11,7 +12,7 @@ export function AppRoutes() {
       screenOptions={{
         headerShown: false,
       }}
-      // initialRouteName='categories'
+      // initialRouteName='search'
     >
 
       <Screen
@@ -22,6 +23,11 @@ export function AppRoutes() {
       <Screen
         name='categories'
         component={Categories}
+      />
+
+      <Screen
+        name='search'
+        component={Search}
       />
 
     </Navigator>

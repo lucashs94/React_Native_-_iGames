@@ -10,6 +10,7 @@ import { GenreBox } from '../../components/GenreBox'
 import { HeaderMain } from '../../components/HeaderMain'
 
 import { Container, ContentArea, ContentAreaTitle, ListArea } from './styles'
+import { Loading } from '../../components/Loading'
 
 
 export type IAPIGenreResponse = {
@@ -45,6 +46,7 @@ export function Home() {
 
   const [genreList, setGenreList] = useState<IGenreProps[]>([])
   const [gameList, setGameList] = useState<IGameProps[]>([])
+  const [loading, setLoading] = useState(true)
 
 
   async function fetchAllGames(){
@@ -85,10 +87,17 @@ export function Home() {
     if(isFocused){
       fetchAllGenres()
       fetchAllGames()
+      setLoading(false)
     }
     
   }, [isFocused])
 
+
+  if(loading){
+    return(
+      <Loading/>
+    )
+  }
 
   return (
     <Container

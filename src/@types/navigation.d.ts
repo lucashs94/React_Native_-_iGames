@@ -7,6 +7,9 @@ export declare global {
       categories: {
         genre: IGenreProps
       }
+      search: {
+        searchText: string | null
+      }
     }
   }
 }
