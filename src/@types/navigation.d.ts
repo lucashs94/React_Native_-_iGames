@@ -10,6 +10,7 @@ export declare global {
       search: {
         searchText: string | null
       }
+      favorites: undefined
     }
   }
 }

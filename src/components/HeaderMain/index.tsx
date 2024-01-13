@@ -1,13 +1,19 @@
+import { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { useTheme } from 'styled-components/native'
 import { Feather, AntDesign } from '@expo/vector-icons'
 
 import logoImg from '../../assets/logo.png'
 
-import { ButtonFavorites, ButtonSearch, Container, Logo, LogoContainer, SearchContainer, SearchInput } from './styles'
-import { useRef, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { TextInputProps } from 'react-native'
-
+import { 
+  ButtonFavorites, 
+  ButtonSearch, 
+  Container, 
+  Logo,
+  LogoContainer, 
+  SearchContainer, 
+  SearchInput 
+} from './styles'
 
 
 export function HeaderMain() {
@@ -15,6 +21,11 @@ export function HeaderMain() {
   const [searchInput, setSearchInput] = useState<string>()
   const { navigate } = useNavigation()
   const { COLORS } = useTheme()
+
+  
+  function handleGoToFavorites(){
+    navigate('favorites')
+  }
 
 
   function handleSearch(){
@@ -35,7 +46,7 @@ export function HeaderMain() {
 
         <ButtonFavorites 
           activeOpacity={0.7}
-          onPress={ () => {} }
+          onPress={ handleGoToFavorites }
         >
           <Feather name="bookmark" size={20} color="white" />
         </ButtonFavorites>
