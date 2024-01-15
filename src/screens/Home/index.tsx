@@ -39,6 +39,7 @@ export type IAPIGameResponse = {
 }
 
 export type IGameProps = {
+  id: string
   name: string
   rating: string
   background_image: string
@@ -58,12 +59,13 @@ export function Home() {
   async function fetchAllGames(){
     const { data } = await api.get<IAPIGameResponse>('games', {
       params:{
-        page_size: 10,
+        page_size: 20,
       }
     })
 
     const games = data.results.map( game => {
       return {
+        id: game.id,
         name: game.name,
         rating: game.rating,
         background_image: game.background_image,

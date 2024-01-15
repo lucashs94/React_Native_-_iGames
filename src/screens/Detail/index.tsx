@@ -1,48 +1,128 @@
+import { useEffect, useState } from 'react'
+import { ActivityIndicator, FlatList } from 'react-native'
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Feather } from '@expo/vector-icons';
 
-import { FlatList, View } from 'react-native'
+import { api } from '../../services/api'
+
+import { Button } from '../../components/Button'
+import { Loading } from '../../components/Loading'
+import { ImageCarousel } from '../../components/ImageCarousel'
+
 import { 
+  ActionButtonsArea,
   Container, 
   Content, 
   DescriptionArea, 
   GenresArea, 
+  LinkButton, 
   OthersInfosArea, 
   PrimaryInfosArea, 
   ScrollImages 
 } from './styles'
 
-const DATA = [
-  {
-    name: "Hitman",
-    background_image: "https://media.rawg.io/media/games/16b/16b1b7b36e2042d1128d5a3e852b3b2f.jpg",
-    rating: "3.92",
-  },
-  {
-    name: "Stardew Valley",
-    background_image: "https://media.rawg.io/media/games/713/713269608dc8f2f40f5a670a14b2de94.jpg",
-    rating: "4.4",
-  },
-  {
-    name: "Garry's Mod",
-    background_image: "https://media.rawg.io/media/games/48c/48cb04ca483be865e3a83119c94e6097.jpg",
-    rating: "3.79",
-  },
-]
+
+type IAPIGameScreenShotResponse = {
+  count: number,
+	next: string | null,
+	previous: string | null,
+	results: IGameScreenShotsProps[] | []
+}
+
+type IGameScreenShotsProps = {
+  id: string | number
+  image: string
+}
+
+type RouteProps = {
+  gameId: string
+}
 
 
 export function Detail() {
+
+  const { params } = useRoute()
+  const { gameId } = params as RouteProps
+
+  const [screenShots, setScreenShots] = useState<IGameScreenShotsProps[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const INSETS = useSafeAreaInsets()
+  const isFocused = useIsFocused()
+  const { navigate } = useNavigation()
+
+
+  async function fetchScheenShots(){
+    const { data } = await api.get<IAPIGameScreenShotResponse>(`games/${gameId}/screenshots`)
+
+    const screenShotsArrayResponse = data.results.map( screenShot => {
+      return {
+        id: screenShot.id,
+        image: screenShot.image,
+      }
+    })
+
+    setScreenShots(screenShotsArrayResponse)
+  }
+
+
+  function handleGoBack(){
+    navigate('home')
+  }
+
+
+  function handleSaveFavorite(){
+    // call AsyncStorage function
+  }
+
+
+  useEffect(() => {
+    
+    if(isFocused){
+      fetchScheenShots()
+      setLoading(false)
+    }
+    
+  }, [isFocused])
+
+
+ if(loading){
+    return(
+      <Loading/>
+    )
+  }
+
+
   return (
-    <Container>
+    <Container
+      insets={INSETS}
+    >
 
       <ScrollImages>
         <FlatList 
-          data={DATA}
-          keyExtractor={item => item.name}
-          renderItem={({item}) => <View style={{ width: '100%', height: '100%'}}></View>}
+          data={screenShots}
+          keyExtractor={item => String(item.id)}
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
-          contentContainerStyle={{ flex: 1 }}
+          renderItem={({ item }) => (
+            <ImageCarousel bg={item.image} />
+          )}
+          ListEmptyComponent={ () => (<ActivityIndicator size={30} color={'#FFF'}/>)}
         />
+
+        <ActionButtonsArea>
+            <Button type='back' onCall={handleGoBack}/>
+            <Button type='book' onCall={ () => {} }/>
+        </ActionButtonsArea>
+
+        <LinkButton
+          activeOpacity={0.6}
+          onPress={ () => {} }
+        >
+          <Feather name="link" size={30} color="white" />
+        </LinkButton>
         
       </ScrollImages>
 

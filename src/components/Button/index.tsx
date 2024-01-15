@@ -8,16 +8,16 @@ type Props = {
   onCall: () => void
 }
 
-export function Button({ type='back' }: Props) {
+export function Button({ type='back', onCall }: Props) {
   return (
     <Container
       activeOpacity={0.7}
-      onPress={ () => {} }
+      onPress={ onCall }
     >
       {
         type === 'back' 
-        ? <AntDesign name="arrowleft" size={30} color="white" />
-        : <Feather name="bookmark" size={20} color="white" />
+        ? <AntDesign name="arrowleft" size={25} color="white" />
+        : <Feather name="bookmark" size={25} color="white" />
       }
       
     </Container>

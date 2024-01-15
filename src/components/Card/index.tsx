@@ -1,4 +1,5 @@
 import { AntDesign } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 import { IGameProps } from '../../screens/Home'
 
@@ -10,7 +11,6 @@ import {
   RatingText, 
   Title 
 } from './styles'
-import { useNavigation } from '@react-navigation/native'
 
 
 type Props = {
@@ -23,7 +23,7 @@ export function Card({ item }: Props) {
 
   
   function handleGoToDetails(){
-    navigate('detail')
+    navigate('detail', { gameId: item.id })
   }
 
 
