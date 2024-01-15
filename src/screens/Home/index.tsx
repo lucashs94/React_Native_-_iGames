@@ -6,11 +6,16 @@ import { useIsFocused } from '@react-navigation/native'
 import { api } from '../../services/api'
 
 import { Card } from '../../components/Card'
+import { Loading } from '../../components/Loading'
 import { GenreBox } from '../../components/GenreBox'
 import { HeaderMain } from '../../components/HeaderMain'
 
-import { Container, ContentArea, ContentAreaTitle, ListArea } from './styles'
-import { Loading } from '../../components/Loading'
+import { 
+  Container, 
+  ContentArea, 
+  ContentAreaTitle, 
+  ListArea 
+} from './styles'
 
 
 export type IAPIGenreResponse = {
@@ -38,6 +43,7 @@ export type IGameProps = {
   rating: string
   background_image: string
 }
+
 
 export function Home() {
   
@@ -99,6 +105,7 @@ export function Home() {
     )
   }
 
+  
   return (
     <Container
       insets={INSETS}

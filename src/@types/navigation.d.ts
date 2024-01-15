@@ -4,6 +4,7 @@ export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined
+      detail: undefined
       categories: {
         genre: IGenreProps
       }
