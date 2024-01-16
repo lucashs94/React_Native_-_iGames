@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Feather } from '@expo/vector-icons';
 
 import { api } from '../../services/api'
+import { DetailsRouteProps } from '../../@types/navigation';
 
 import { Button } from '../../components/Button'
 import { Loading } from '../../components/Loading'
@@ -23,6 +24,27 @@ import {
 } from './styles'
 
 
+
+type IGameDeatilResponseProps = {
+  id: string
+  name: string
+  rating: string
+  description_raw: string
+  genres: { name: string }[]
+  platforms: { platform: { name: string }}[]
+  stores: { store: { name: string }}[]
+}
+
+type IGameDeatilProps = {
+  id: string
+  name: string
+  rating: string
+  description_raw: string
+  genres: string[]
+  platforms: string[]
+  stores: string[]
+}
+
 type IAPIGameScreenShotResponse = {
   count: number,
 	next: string | null,
@@ -35,16 +57,13 @@ type IGameScreenShotsProps = {
   image: string
 }
 
-type RouteProps = {
-  gameId: string
-}
-
 
 export function Detail() {
 
   const { params } = useRoute()
-  const { gameId } = params as RouteProps
+  const { gameId } = params as DetailsRouteProps
 
+  const [gameData, setGameData] = useState<IGameDeatilProps>()
   const [screenShots, setScreenShots] = useState<IGameScreenShotsProps[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -66,6 +85,22 @@ export function Detail() {
     setScreenShots(screenShotsArrayResponse)
   }
 
+  async function fetchGame(){
+    const { data } = await api.get<IGameDeatilResponseProps>(`games/${gameId}`)
+
+    const gamesDetailResponse = {
+      id: data.id,
+      name: data.name,
+      rating: data.rating,
+      description_raw: data.description_raw,
+      genres: data.genres.map( genre => genre.name ),
+      platforms: data.platforms.map( platform => platform.platform.name ),
+      stores: data.stores.map( store => store.store.name ),
+    }
+
+    setGameData(gamesDetailResponse)
+  }
+
 
   function handleGoBack(){
     navigate('home')
@@ -81,6 +116,7 @@ export function Detail() {
     
     if(isFocused){
       fetchScheenShots()
+      fetchGame()
       setLoading(false)
     }
     

@@ -1,12 +1,14 @@
 import { IGenreProps } from "../screens/Home"
 
+export type DetailsRouteProps = {
+  gameId: string
+}
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined
-      detail: {
-        gameId: string
-      }
+      detail: DetailsRouteProps
       categories: {
         genre: IGenreProps
       }
