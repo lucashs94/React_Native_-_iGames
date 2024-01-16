@@ -10,6 +10,8 @@ export const Container = styled.View<ContainerProps>`
   flex: 1;
 
   padding-top: ${({ insets }) => insets.top}px;
+  padding-bottom: 10px;
+
   background-color: ${({ theme }) => theme.COLORS.PRIMARY_900};
 `
 
@@ -44,12 +46,18 @@ export const LinkButton = styled.TouchableOpacity`
 
 export const Content = styled.View`
   flex: 1;
-  padding: 30px 15px;
+  
+  padding: 20px 15px 0px;
+`
+
+export const ScrollContent = styled.ScrollView`
 `
 
 export const PrimaryInfosArea = styled.View`
   width: 100%;
   gap: 6px;
+
+  margin-bottom: 10px;
 `
 
 export const RatingArea = styled.View`
@@ -70,16 +78,4 @@ export const GameNameText = styled.Text`
   color: ${({ theme }) => theme.COLORS.WHITE};
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
-`
-
-export const GenresArea = styled.View`
-
-`
-
-export const DescriptionArea = styled.View`
-
-`
-
-export const OthersInfosArea = styled.View`
-
 `

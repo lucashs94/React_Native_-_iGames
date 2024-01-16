@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ActivityIndicator, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Feather, AntDesign } from '@expo/vector-icons';
@@ -9,23 +9,22 @@ import { DetailsRouteProps } from '../../@types/navigation';
 
 import { Button } from '../../components/Button'
 import { Loading } from '../../components/Loading'
+import { Description } from '../../components/Description'
+import { SectionView } from '../../components/SectionView'
 import { ImageCarousel } from '../../components/ImageCarousel'
 
 import { 
   ActionButtonsArea,
   Container, 
   Content, 
-  DescriptionArea, 
   GameNameText, 
-  GenresArea, 
   LinkButton, 
-  OthersInfosArea, 
   PrimaryInfosArea, 
   RatingArea, 
   RatingText, 
+  ScrollContent, 
   ScrollImages 
 } from './styles'
-
 
 
 type IGameDeatilResponseProps = {
@@ -138,9 +137,8 @@ export function Detail() {
     <Container
       insets={INSETS}
     >
-
       <ScrollImages>
-        <FlatList 
+        <FlatList
           data={screenShots}
           keyExtractor={item => String(item.id)}
           horizontal
@@ -151,49 +149,45 @@ export function Detail() {
           )}
           // ListEmptyComponent={ () => (<ActivityIndicator size={30} color={'#FFF'}/>)}
         />
-
         <ActionButtonsArea>
             <Button type='back' onCall={handleGoBack}/>
             <Button type='book' onCall={ () => {} }/>
         </ActionButtonsArea>
-
         <LinkButton
           activeOpacity={0.6}
           onPress={ () => {} }
         >
           <Feather name="link" size={30} color="white" />
         </LinkButton>
-        
-      </ScrollImages>
-
+    
+      </ScrollImages> 
+      
       <Content>
-        <PrimaryInfosArea>
-            <RatingArea>
-              <AntDesign name="star" size={18} color="#FABB1E" />
+        <ScrollContent>
+          <PrimaryInfosArea>
+              <RatingArea>
+                <AntDesign name="star" size={18} color="#FABB1E" />
+                <RatingText>
+                  {gameData?.rating} / 10
+                </RatingText>
+              </RatingArea>
 
-              <RatingText>
-                {gameData?.rating} / 10
-              </RatingText>
-            </RatingArea>
+              <GameNameText>
+                {gameData?.name}
+              </GameNameText>
+          </PrimaryInfosArea>
+          
+          <SectionView boxBG='light' dataArray={gameData?.genres} title='Genres'/>
+          
+          <Description text={gameData?.description_raw} onCall={ () => {} }/>
+          
+          <SectionView boxBG='dark' dataArray={gameData?.platforms} title='Platforms'/>
+          <SectionView boxBG='dark' dataArray={gameData?.stores} title='Stores'/>
 
-            <GameNameText>
-              {gameData?.name}
-            </GameNameText>
-        </PrimaryInfosArea>
-
-        <GenresArea>
-
-        </GenresArea>
-
-        <DescriptionArea>
-
-        </DescriptionArea>
-
-        <OthersInfosArea>
-
-        </OthersInfosArea>
+        </ScrollContent>
       </Content>
 
-    </Container>
+    </Container>  
+
   )
 }
