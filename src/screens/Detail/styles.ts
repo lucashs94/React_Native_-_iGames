@@ -43,11 +43,33 @@ export const LinkButton = styled.TouchableOpacity`
 `
 
 export const Content = styled.View`
-
+  flex: 1;
+  padding: 30px 15px;
 `
 
 export const PrimaryInfosArea = styled.View`
+  width: 100%;
+  gap: 6px;
+`
 
+export const RatingArea = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+`
+
+export const RatingText = styled.Text`
+  color: ${({ theme }) => theme.COLORS.WHITE};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
+
+  margin-top: 5px;
+`
+
+export const GameNameText = styled.Text`
+  color: ${({ theme }) => theme.COLORS.WHITE};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
 `
 
 export const GenresArea = styled.View`

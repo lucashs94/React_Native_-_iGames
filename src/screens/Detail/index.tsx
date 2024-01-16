@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList } from 'react-native'
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Feather } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons';
 
 import { api } from '../../services/api'
 import { DetailsRouteProps } from '../../@types/navigation';
@@ -16,10 +16,13 @@ import {
   Container, 
   Content, 
   DescriptionArea, 
+  GameNameText, 
   GenresArea, 
   LinkButton, 
   OthersInfosArea, 
   PrimaryInfosArea, 
+  RatingArea, 
+  RatingText, 
   ScrollImages 
 } from './styles'
 
@@ -85,6 +88,7 @@ export function Detail() {
     setScreenShots(screenShotsArrayResponse)
   }
 
+
   async function fetchGame(){
     const { data } = await api.get<IGameDeatilResponseProps>(`games/${gameId}`)
 
@@ -99,6 +103,7 @@ export function Detail() {
     }
 
     setGameData(gamesDetailResponse)
+    setLoading(false)
   }
 
 
@@ -117,7 +122,6 @@ export function Detail() {
     if(isFocused){
       fetchScheenShots()
       fetchGame()
-      setLoading(false)
     }
     
   }, [isFocused])
@@ -145,7 +149,7 @@ export function Detail() {
           renderItem={({ item }) => (
             <ImageCarousel bg={item.image} />
           )}
-          ListEmptyComponent={ () => (<ActivityIndicator size={30} color={'#FFF'}/>)}
+          // ListEmptyComponent={ () => (<ActivityIndicator size={30} color={'#FFF'}/>)}
         />
 
         <ActionButtonsArea>
@@ -164,7 +168,17 @@ export function Detail() {
 
       <Content>
         <PrimaryInfosArea>
+            <RatingArea>
+              <AntDesign name="star" size={18} color="#FABB1E" />
 
+              <RatingText>
+                {gameData?.rating} / 10
+              </RatingText>
+            </RatingArea>
+
+            <GameNameText>
+              {gameData?.name}
+            </GameNameText>
         </PrimaryInfosArea>
 
         <GenresArea>
