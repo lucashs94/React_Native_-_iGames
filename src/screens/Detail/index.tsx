@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
-import { FlatList } from 'react-native'
+import { useEffect, useRef, useState } from 'react'
+import { FlatList, Linking } from 'react-native'
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Feather, AntDesign } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons'
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
 
 import { api } from '../../services/api'
 import { DetailsRouteProps } from '../../@types/navigation';
 
 import { Button } from '../../components/Button'
 import { Loading } from '../../components/Loading'
+import { BottomSheet } from '../../components/BottomSheet'
 import { Description } from '../../components/Description'
 import { SectionView } from '../../components/SectionView'
 import { ImageCarousel } from '../../components/ImageCarousel'
@@ -32,6 +34,7 @@ type IGameDeatilResponseProps = {
   name: string
   rating: string
   description_raw: string
+  website: string
   genres: { name: string }[]
   platforms: { platform: { name: string }}[]
   stores: { store: { name: string }}[]
@@ -42,6 +45,7 @@ type IGameDeatilProps = {
   name: string
   rating: string
   description_raw: string
+  website: string
   genres: string[]
   platforms: string[]
   stores: string[]
@@ -61,6 +65,8 @@ type IGameScreenShotsProps = {
 
 
 export function Detail() {
+
+  const bottomSheetRef = useRef<BottomSheetModal>(null)
 
   const { params } = useRoute()
   const { gameId } = params as DetailsRouteProps
@@ -96,6 +102,7 @@ export function Detail() {
       name: data.name,
       rating: data.rating,
       description_raw: data.description_raw,
+      website: data.website,
       genres: data.genres.map( genre => genre.name ),
       platforms: data.platforms.map( platform => platform.platform.name ),
       stores: data.stores.map( store => store.store.name ),
@@ -108,6 +115,16 @@ export function Detail() {
 
   function handleGoBack(){
     navigate('home')
+  }
+
+
+  function handleOpenLink(){
+    Linking.openURL(String(gameData?.website))
+  }
+
+
+  function handleOpenBottomSheet(){
+    bottomSheetRef.current?.present()
   }
 
 
@@ -147,15 +164,16 @@ export function Detail() {
           renderItem={({ item }) => (
             <ImageCarousel bg={item.image} />
           )}
-          // ListEmptyComponent={ () => (<ActivityIndicator size={30} color={'#FFF'}/>)}
         />
+
         <ActionButtonsArea>
             <Button type='back' onCall={handleGoBack}/>
             <Button type='book' onCall={ () => {} }/>
         </ActionButtonsArea>
+
         <LinkButton
           activeOpacity={0.6}
-          onPress={ () => {} }
+          onPress={ handleOpenLink }
         >
           <Feather name="link" size={30} color="white" />
         </LinkButton>
@@ -166,26 +184,32 @@ export function Detail() {
         <ScrollContent>
           <PrimaryInfosArea>
               <RatingArea>
+
                 <AntDesign name="star" size={18} color="#FABB1E" />
                 <RatingText>
                   {gameData?.rating} / 10
                 </RatingText>
+
               </RatingArea>
 
               <GameNameText>
                 {gameData?.name}
               </GameNameText>
+
           </PrimaryInfosArea>
           
           <SectionView boxBG='light' dataArray={gameData?.genres} title='Genres'/>
           
-          <Description text={gameData?.description_raw} onCall={ () => {} }/>
+          <Description text={gameData?.description_raw} onCall={ handleOpenBottomSheet }/>
           
           <SectionView boxBG='dark' dataArray={gameData?.platforms} title='Platforms'/>
           <SectionView boxBG='dark' dataArray={gameData?.stores} title='Stores'/>
 
         </ScrollContent>
       </Content>
+
+        
+      <BottomSheet ref={bottomSheetRef} description={gameData?.description_raw}/>
 
     </Container>  
 

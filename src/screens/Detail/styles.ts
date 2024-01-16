@@ -56,8 +56,6 @@ export const ScrollContent = styled.ScrollView`
 export const PrimaryInfosArea = styled.View`
   width: 100%;
   gap: 6px;
-
-  margin-bottom: 10px;
 `
 
 export const RatingArea = styled.View`
