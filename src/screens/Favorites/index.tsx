@@ -13,6 +13,7 @@ import { IGameProps } from '../Home'
 
 
 import { ButtonBack, Container, Content, Header, HeaderTitle } from './styles'
+import { EmptyList } from '../../components/EmptyList'
 
 
 export function Favorites() {
@@ -83,6 +84,7 @@ export function Favorites() {
           renderItem={({ item }) => (
             <Card item={item}/>
           )}
+          ListEmptyComponent={<EmptyList/>}
         />
       </Content>
     </Container>
