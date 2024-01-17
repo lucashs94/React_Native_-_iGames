@@ -82,7 +82,7 @@ export function Home() {
       setGameList(prev => [...prev, ...games])
 
       if(data.next){
-        setPage( prev => prev+1)
+        setPage( prev => prev + 1)
       }else{
         setHasMoreData(false)
       }
@@ -108,12 +108,10 @@ export function Home() {
 
   useEffect(() => {
 
-    if(isFocused){
-      fetchAllGenres()
-      fetchAllGames()
-    }
-    
-  }, [isFocused])
+    fetchAllGenres()
+    fetchAllGames()
+
+  }, [])
 
 
   if(loading){
