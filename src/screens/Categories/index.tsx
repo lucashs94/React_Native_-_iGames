@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
-import { useIsFocused, useNavigation, useRoute,  } from '@react-navigation/native'
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { AntDesign } from '@expo/vector-icons'
 
 import { api } from '../../services/api'
 
 import { Card } from '../../components/Card'
+import { Loading } from '../../components/Loading'
 import { IAPIGameResponse, IGameProps, IGenreProps } from '../Home'
 
 import { ButtonBack, CategoryTitle, Container, Content, Header } from './styles'
-import { Loading } from '../../components/Loading'
+
 
 type Props = {
   genre: IGenreProps
@@ -39,6 +40,7 @@ export function Categories() {
 
     const games = data.results.map( game => {
       return {
+        id: game.id,
         name: game.name,
         rating: game.rating,
         background_image: game.background_image,
