@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FlatList } from 'react-native'
+import { ActivityIndicator, FlatList } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useIsFocused } from '@react-navigation/native'
 
@@ -53,26 +53,42 @@ export function Home() {
 
   const [genreList, setGenreList] = useState<IGenreProps[]>([])
   const [gameList, setGameList] = useState<IGameProps[]>([])
+  const [page, setPage] = useState(1)
+  const [hasMoreData, setHasMoreData] = useState(true)
   const [loading, setLoading] = useState(true)
 
 
   async function fetchAllGames(){
+
+    if(!hasMoreData) return
+
     const { data } = await api.get<IAPIGameResponse>('games', {
       params:{
-        page_size: 20,
+        page: page,
+        page_size: 10,
       }
     })
 
-    const games = data.results.map( game => {
-      return {
-        id: game.id,
-        name: game.name,
-        rating: game.rating,
-        background_image: game.background_image,
-      }
-    })
+    if(data.results){
+      const games = data.results.map( game => {
+        return {
+          id: game.id,
+          name: game.name,
+          rating: game.rating,
+          background_image: game.background_image,
+        }
+      })
 
-    setGameList(games)
+      setGameList(prev => [...prev, ...games])
+
+      if(data.next){
+        setPage( prev => prev+1)
+      }else{
+        setHasMoreData(false)
+      }
+    }
+
+    setLoading(false)
   }
   
   async function fetchAllGenres(){
@@ -95,7 +111,6 @@ export function Home() {
     if(isFocused){
       fetchAllGenres()
       fetchAllGames()
-      setLoading(false)
     }
     
   }, [isFocused])
@@ -134,9 +149,14 @@ export function Home() {
         <FlatList 
           data={gameList}
           keyExtractor={ item => String(item.name)}
+          onEndReached={fetchAllGames}
+          onEndReachedThreshold={0.1}
           renderItem={({ item }) => (
             <Card item={item}/>
           )}
+          ListFooterComponent={
+            <ActivityIndicator size={'large'} color={'red'} style={{ marginVertical: 10}}/>
+          }
         />
 
       </ContentArea>

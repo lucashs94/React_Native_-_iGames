@@ -31,7 +31,7 @@ export const BottomSheet = forwardRef<Ref, Props>(( props, ref ) => {
       index={0}
       snapPoints={snapPoints}
       enablePanDownToClose={true}
-      onChange={handleSheetChanges}
+      // onChange={handleSheetChanges}
       backgroundStyle={{ backgroundColor: COLORS.GRAY_900, }}
       handleComponent={() => 
         <View style={{ alignSelf: 'center'}}>
