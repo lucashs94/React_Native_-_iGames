@@ -27,6 +27,7 @@ import {
   ScrollContent, 
   ScrollImages 
 } from './styles'
+import { getOneFavorite, removeFavorite, saveFavorite } from '../../services/storage'
 
 
 type IGameDeatilResponseProps = {
@@ -40,7 +41,7 @@ type IGameDeatilResponseProps = {
   stores: { store: { name: string }}[]
 }
 
-type IGameDeatilProps = {
+export type IGameDeatilProps = {
   id: string
   name: string
   rating: string
@@ -74,6 +75,7 @@ export function Detail() {
   const [gameData, setGameData] = useState<IGameDeatilProps>()
   const [screenShots, setScreenShots] = useState<IGameScreenShotsProps[]>([])
   const [loading, setLoading] = useState(true)
+  const [isFavorite, setIsFavorite] = useState(false)
 
   const INSETS = useSafeAreaInsets()
   const isFocused = useIsFocused()
@@ -108,6 +110,11 @@ export function Detail() {
       stores: data.stores.map( store => store.store.name ),
     }
 
+    if(data){
+      const isFavoriteVar = await getOneFavorite(data.id)
+      isFavoriteVar && setIsFavorite(true)
+    }
+
     setGameData(gamesDetailResponse)
     setLoading(false)
   }
@@ -128,8 +135,19 @@ export function Detail() {
   }
 
 
-  function handleSaveFavorite(){
-    // call AsyncStorage function
+  async function handleSaveFavorite(){
+    
+    if(gameData){
+
+      if(!isFavorite){
+        await saveFavorite(gameData.id)
+        setIsFavorite(true)
+
+      }else{
+        await removeFavorite(gameData.id)
+        setIsFavorite(false)
+      }
+    }
   }
 
 
@@ -168,7 +186,7 @@ export function Detail() {
 
         <ActionButtonsArea>
             <Button type='back' onCall={handleGoBack}/>
-            <Button type='book' onCall={ () => {} }/>
+            <Button type={isFavorite ? 'bookFill' : 'book'} onCall={ handleSaveFavorite }/>
         </ActionButtonsArea>
 
         <LinkButton

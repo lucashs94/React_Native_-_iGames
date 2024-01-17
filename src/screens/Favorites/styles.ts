@@ -29,7 +29,7 @@ export const Header = styled.View`
 export const ButtonBack = styled.TouchableOpacity`
 `
 
-export const CategoryTitle = styled.Text`
+export const HeaderTitle = styled.Text`
   color: ${({ theme }) => theme.COLORS.WHITE};
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.XL}px;

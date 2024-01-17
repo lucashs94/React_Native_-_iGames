@@ -14,7 +14,6 @@ export function AppRoutes() {
       screenOptions={{
         headerShown: false,
       }}
-      // initialRouteName='search'
     >
 
       <Screen

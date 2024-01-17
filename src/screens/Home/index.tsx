@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useIsFocused } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
 
 import { api } from '../../services/api'
 
@@ -48,7 +48,6 @@ export type IGameProps = {
 
 export function Home() {
   
-  const isFocused = useIsFocused()
   const INSETS = useSafeAreaInsets()
 
   const [genreList, setGenreList] = useState<IGenreProps[]>([])
@@ -104,7 +103,6 @@ export function Home() {
 
     setGenreList(genres)
   }
-
 
   useEffect(() => {
 

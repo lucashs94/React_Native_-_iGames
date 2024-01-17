@@ -1,10 +1,10 @@
-import { Feather, AntDesign } from '@expo/vector-icons'
+import { Feather, AntDesign, FontAwesome } from '@expo/vector-icons'
 
 
 import { Container } from './styles'
 
 type Props = {
-  type?: 'back' | 'book'
+  type?: 'back' | 'book' | 'bookFill'
   onCall: () => void
 }
 
@@ -15,10 +15,15 @@ export function Button({ type='back', onCall }: Props) {
       onPress={ onCall }
     >
       {
-        type === 'back' 
-        ? <AntDesign name="arrowleft" size={25} color="white" />
-        : <Feather name="bookmark" size={25} color="white" />
+        type === 'back' && <AntDesign name="arrowleft" size={25} color="white" />
       }
+      {
+        type === 'book' && <Feather name="bookmark" size={25} color="white" />
+      }
+      {
+        type === 'bookFill' && <FontAwesome name="bookmark" size={25} color="white" />
+      }
+      
       
     </Container>
   )

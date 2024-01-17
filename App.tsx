@@ -23,7 +23,6 @@ export default function App() {
     async function prepare(){
       try {
         await new Promise(resolve => setTimeout(resolve, 4000))
-        console.log('passou aqui')
         
       } catch (error) { 
         console.log(error)
