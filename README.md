@@ -141,11 +141,20 @@ cd React_Native_-_iGames
   
 ```
  
-**Instale as dependencias**
+**Instale as dependências**
 
 ```bash
   
 npm install
+  
+```
+ 
+**Altere o arquivo .env**
+
+```bash
+  
+cp .env.exampe .env
+nano .env
   
 ```
  
