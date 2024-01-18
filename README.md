@@ -58,7 +58,7 @@ O layout da aplicação está disponível no Figma:
   <img alt="App Screens" title="#AppScreens" src="./docs/home.png" width="200px">
   <img alt="App Screens" title="#AppScreens" src="./docs/search.png" width="200px">
   <img alt="App Screens" title="#AppScreens" src="./docs/categories.png" width="200px">
-  <img alt="App Screens" title="#AppScreens" src="./docs/details.png" width="200px">
+  <img alt="App Screens" title="#AppScreens" src="./docs/detail.png" width="200px">
   <img alt="App Screens" title="#AppScreens" src="./docs/favorites.png" width="200px">
 </p>
 <br>
