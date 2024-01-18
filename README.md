@@ -45,8 +45,8 @@
 O layout da aplicação está disponível no Figma:
 <p>
 
-  <a href="https://www.figma.com/file/1SxgOMojOB2zYT0Mdk28lB/Ecoleta?node-id=136%3A546">
-    <img alt="Made by tgmarinho" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
+  <a href="https://www.figma.com/file/w5LYjS2h3MS61xY3teWIB8/iGame-App?type=design&node-id=0%3A1&mode=design&t=veR4tcky3iz1AH8O-1">
+    <img alt="Made by lucashs94" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
   </a>
 </p>
 <br>
