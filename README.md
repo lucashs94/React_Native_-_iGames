@@ -55,11 +55,11 @@ O layout da aplicação está disponível no Figma:
 ### Telas
 
 <p align="center">
-  <img alt="App Screens" title="#AppScreens" src="./docs/home.png" width="170px">
-  <img alt="App Screens" title="#AppScreens" src="./docs/search.png" width="170px">
-  <img alt="App Screens" title="#AppScreens" src="./docs/categories.png" width="170px">
-  <img alt="App Screens" title="#AppScreens" src="./docs/detail.png" width="170px">
-  <img alt="App Screens" title="#AppScreens" src="./docs/favorites.png" width="170px">
+  <img alt="App Screens" title="#AppScreens" src="./docs/home.png" width="160px">
+  <img alt="App Screens" title="#AppScreens" src="./docs/search.png" width="160px">
+  <img alt="App Screens" title="#AppScreens" src="./docs/categories.png" width="160px">
+  <img alt="App Screens" title="#AppScreens" src="./docs/detail.png" width="160px">
+  <img alt="App Screens" title="#AppScreens" src="./docs/favorites.png" width="160px">
 </p>
 <br>
 
