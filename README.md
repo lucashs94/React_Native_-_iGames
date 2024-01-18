@@ -122,7 +122,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 <br>
 
-### 🎲 Rodando o Backend (servidor)
+### 🎲 Rodando o Projeto
 
  
 **Clone este repositório**
