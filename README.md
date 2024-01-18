@@ -14,9 +14,9 @@
     <img alt="iGames" title="#iGames" src="./docs/banner.png" />
 </h1>
 
-<h2 align="center"> 
+<h1 align="center"> 
 	iGames - Seu App Game mais completo
-</h2>
+</h1>
 <br>
 
 <p align="center">
