@@ -18,7 +18,7 @@
 	iGames - Seu App Game mais completo
 </h1>
 <br>
-
+---
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#-layout">Layout</a> • 
